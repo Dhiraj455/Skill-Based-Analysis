@@ -10,16 +10,21 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 ques_ans = {
     0: {
         'question': 'How Many Continents are there in the World?',
-        'option': ['7', '8', '9', '10'],
+        'option1': '7',
+        'option2': '8',
+        'option3': '9',
+        'option4': '10',
         'answer': '7'
     },
     1: {
         'question': 'Which Is India\'s Capital?',
-        'option': ['New Delhi', 'Mumbai', 'Chennai', 'Kolkata'],
+        'option1': 'New Delhi',
+        'option2': 'Mumbai',
+        'option3': 'Chennai',
+        'option4': 'Kolkata',
         'answer': 'New Delhi'
     },
 }
-
 str = """
 ScreenManager:
     WelcomeScreen:
@@ -143,9 +148,10 @@ ScreenManager:
         md_bg_color: app.theme_cls.primary_color
         user_font_size: '40sp'
         pos_hint: {'center_x': .1, 'center_y': .3}
-        on_press:
+        on_release:
             root.manager.current = 'quiz'
             root.manager.transition.direction = 'left'
+        on_press: app.quiz()
     MDScreen:
         MDNavigationLayout:
             ScreenManager:
@@ -203,21 +209,39 @@ ScreenManager:
         pos_hint: {'center_x': .5, 'center_y': .7}
     MDFlatButton:
         id: option1
+        width: '200dp'
+        height: '100dp'
+        border_radius: '10dp'
+        bg_color: app.theme_cls.primary_color
         text: ''
         pos_hint: {'center_x': .3, 'center_y': .5}
+        md_bg_color: app.theme_cls.primary_color
     MDFlatButton:
-        id: option2`
+        id: option2
+        width: '200dp'
+        height: '100dp'
+        border_radius: '10dp'
+        bg_color: app.theme_cls.primary_color
         text: ''
         pos_hint: {'center_x': .7, 'center_y': .5}
+        md_bg_color: app.theme_cls.primary_color
     MDFlatButton:
         id: option3
+        width: '200dp'
+        height: '100dp'
+        border_radius: '10dp'
+        bg_color: app.theme_cls.primary_color
         text: ''
         pos_hint: {'center_x': .3, 'center_y': .3}
+        md_bg_color: app.theme_cls.primary_color
     MDFlatButton:
         id: option4
+        color: app.theme_cls.primary_color
+        width: '200dp'
+        height: '100dp'
+        border_radius: '10dp'
         text: ''
-        pos_hint: {'center_x': .7, 'center_y': .3}
-                         
+        pos_hint: {'center_x': .7, 'center_y': .3}                       
 """
 class WelcomeScreen(Screen):
     pass
@@ -247,10 +271,19 @@ class MainApp(MDApp):
     def on_start(self):
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.accent_palette = 'Blue'
-        self.theme_cls.theme_style = 'Dark'
-        self.theme_cls.primary_hue = '500'
-        self.theme_cls.accent_hue = '500'
-        self.theme_cls.theme_mode = 'Light'
+        # self.theme_cls.theme_style = 'Dark'
     
+    def quiz(self):
+        for i in range(0,2):
+            self.str.get_screen('quiz').ids.question.text = ques_ans[i]['question']
+            self.str.get_screen('quiz').ids.option1.text = ques_ans[i]['option1']
+            self.str.get_screen('quiz').ids.option2.text = ques_ans[i]['option2']
+            self.str.get_screen('quiz').ids.option3.text = ques_ans[i]['option3']
+            self.str.get_screen('quiz').ids.option4.text = ques_ans[i]['option4']
+            # self.str.ids.question.text = ques_ans[i]['question']
+            # self.str.ids.option1.text = ques_ans[i]['option'][i]
+            # self.str.ids.option2.text = ques_ans[i]['option'][i+1]
+            # self.str.ids.option3.text = ques_ans[i]['option'][i+2]
+            # self.str.ids.option4.text = ques_ans[i]['option'][i+3]
 
 MainApp().run()
