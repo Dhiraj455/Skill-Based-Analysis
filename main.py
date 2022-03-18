@@ -1,5 +1,9 @@
 #Hello World Page Using KivyMd
 from kivymd.app import MDApp
+# from kivy.base import runTouchApp
+from kivy.core.window import Window
+from kivy.uix.scrollview import ScrollView
+from kivymd.uix.screen import Screen
 from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
@@ -7,6 +11,7 @@ from kivymd.uix.list import MDList
 # from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 
+Window.size = (400, 750)
 ques_ans = {
     0: {
         'question': 'How Many Continents are there in the World?',
@@ -138,7 +143,7 @@ ScreenManager:
         icon: 'account'
         md_bg_color: app.theme_cls.primary_color
         user_font_size: '40sp'
-        pos_hint: {'center_x': .8, 'center_y': .8}
+        pos_hint: {'center_x': .9, 'center_y': .1}
         on_press:
             root.manager.current = 'profile'
             root.manager.transition.direction = 'up'
@@ -192,7 +197,7 @@ ScreenManager:
         md_bg_color: 0,0,0,0.5
         radius: 10
         MDLabel:
-            text: '    Graphic Design'
+            text: '   Graphic Design'
             font_style: 'H6'
             halign: 'left'
             theme_text_color: 'Custom'
@@ -217,7 +222,7 @@ ScreenManager:
         md_bg_color: 0,0,0,0.5
         radius: 10
         MDLabel:
-            text: '    Game Developer'
+            text: '   Game Developer'
             font_style: 'H6'
             halign: 'left'
             theme_text_color: 'Custom'
@@ -338,32 +343,47 @@ ScreenManager:
         pos_hint: {'center_x': .5, 'center_y': .1}
 <ProfileScreen>:
     name: 'profile'
-    MDScreen:
-        MDLabel:
-            text: 'My Profile'
-            font_style: 'H3'
-            halign: 'center'
-            pos_hint: {'center_x': .5, 'center_y': .8}
-        MDCard:
-            size_hint: (0.3,0.3)
-            pos_hint: {'center_x': .5, 'center_y': .6}
-            radius: 30
-            Image:
-                source: 'people.jpg'
-                size_hint: (0.9, 1)
-                pos_hint: {'center_x': .5,'center_y': .5}
-                size: self.texture_size
-                halign: 'center'
-        MDLabel:
-            text: 'Name: Group 8'
-            font_style: 'H5'
-            halign: 'center'
-            pos_hint: {'center_y': .4}
-        MDLabel:
-            text: 'Email: group8@gmail.com'
-            font_style: 'H5'
-            halign: 'center'
-            pos_hint: {'center_y': .35}
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            MDScreen:
+                size_hint_y: 1
+                MDLabel:
+                    text: 'My Profile'
+                    font_style: 'H3'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .8}
+                MDCard:
+                    size_hint: (0.3,0.1)
+                    pos_hint: {'center_x': .5, 'center_y': .7}
+                    radius: 30
+                    Image:
+                        source: 'people.jpg'
+                        size_hint: (0.9, 1)
+                        pos_hint: {'center_x': .5,'center_y': .5}
+                        size: self.texture_size
+                        halign: 'center'
+                MDLabel:
+                    text: 'Name: Group 8'
+                    font_style: 'H5'
+                    halign: 'center'
+                    pos_hint: {'center_y': .6}
+                MDLabel:
+                    text: 'Email: group8@gmail.com'
+                    font_style: 'H5'
+                    halign: 'center'
+                    pos_hint: {'center_y': .55}
+                MDLabel:
+                    text: 'Status'
+                    font_style: 'H4'
+                    pos_hint: {'center_x': .6,'center_y': .45}
+                Image:
+                    source: 'Capture.jpg'
+                    size_hint: (0.8, 0.8)
+                    pos_hint: {'center_x': .5,'center_y': .2}
+                    size: self.texture_size
+                    halign: 'center'
     MDScreen:
         MDNavigationLayout:
             ScreenManager:
@@ -428,7 +448,7 @@ sm.add_widget(WelcomeScreen(name='welcome'))
 sm.add_widget(LoginScreen(name='login'))
 sm.add_widget(SignupScreen(name='signup'))
 sm.add_widget(MainScreen(name='main'))
-
+sm.add_widget(ProfileScreen(name='profile'))
 class MainApp(MDApp):
     def build(self):
         self.str = Builder.load_string(str)
@@ -437,7 +457,7 @@ class MainApp(MDApp):
     def on_start(self):
         self.theme_cls.primary_palette = 'Blue'
         self.theme_cls.accent_palette = 'Blue'
-        # self.theme_cls.theme_style = 'Dark'
+        self.theme_cls.theme_style = 'Dark'
     
     def quiz(self):
         for i in range(0,2):
