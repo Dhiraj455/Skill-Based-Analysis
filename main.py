@@ -17,11 +17,11 @@ ques_ans = {
         'answer': '7'
     },
     1: {
-        'question': 'Which Is India\'s Capital?',
-        'option1': 'New Delhi',
-        'option2': 'Mumbai',
-        'option3': 'Chennai',
-        'option4': 'Kolkata',
+        'question': 'Python is a __________ language.',
+        'option1': 'High level',
+        'option2': 'Interpreted',
+        'option3': 'Compiled',
+        'option4': 'All of the above',
         'answer': 'New Delhi'
     },
 }
@@ -32,6 +32,7 @@ ScreenManager:
     SignupScreen:
     MainScreen:
     QuizScreen:
+    ProfileScreen:
     
 <WelcomeScreen>:
     name: 'welcome'
@@ -42,7 +43,7 @@ ScreenManager:
         pos_hint: {'center_x': .5, 'center_y': .7}
     MDFloatingActionButton:
         id: welcome_fab
-        icon: 'arrow-right'
+        icon: 'android'
         md_bg_color:app.theme_cls.primary_color
         pos_hint: {'center_x':0.5,'center_y':0.5}
         user_font_size : '45sp'
@@ -133,6 +134,14 @@ ScreenManager:
             root.manager.transition.direction = 'right'
 <MainScreen>:
     name: 'main'
+    MDFloatingActionButton:
+        icon: 'account'
+        md_bg_color: app.theme_cls.primary_color
+        user_font_size: '40sp'
+        pos_hint: {'center_x': .8, 'center_y': .8}
+        on_press:
+            root.manager.current = 'profile'
+            root.manager.transition.direction = 'up'
     MDLabel:
         text: 'Skill Based Analysis'
         font_style: 'H4'
@@ -147,11 +156,86 @@ ScreenManager:
         icon: 'plus'
         md_bg_color: app.theme_cls.primary_color
         user_font_size: '40sp'
-        pos_hint: {'center_x': .1, 'center_y': .3}
+        pos_hint: {'center_x': .1, 'center_y': .1}
         on_release:
             root.manager.current = 'quiz'
             root.manager.transition.direction = 'left'
         on_press: app.quiz()
+    MDCard:
+        size_hint: (0.9,0.1)
+        pos_hint: {'center_x': .5, 'center_y': .6}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '    Python'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDLabel:
+            text: '22/30    '
+            font_style: 'H6'
+            halign: 'right'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'book-open-variant'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+    MDCard:
+        size_hint: (0.9,0.1)
+        pos_hint: {'center_x': .5, 'center_y': .45}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '    Graphic Design'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDLabel:
+            text: '26/30    '
+            font_style: 'H6'
+            halign: 'right'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'book-open-variant'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+    MDCard:
+        size_hint: (0.9,0.1)
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '    Game Developer'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDLabel:
+            text: '20/30    '
+            font_style: 'H6'
+            halign: 'right'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'book-open-variant'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
     MDScreen:
         MDNavigationLayout:
             ScreenManager:
@@ -198,50 +282,130 @@ ScreenManager:
     name: 'quiz'
     MDLabel:
         text: 'Skill Quiz'
-        font_style: 'H4'
+        font_style: 'H2'
         halign: 'center'
         pos_hint: {'center_x': .5, 'center_y': .9}
     MDLabel:
         id: question
         text: ''
-        font_style: 'H6'
+        font_style: 'H4'
         halign: 'center'
-        pos_hint: {'center_x': .5, 'center_y': .7}
-    MDFlatButton:
+        pos_hint: {'center_y': .7}
+    MDRaisedButton:
         id: option1
-        width: '200dp'
-        height: '100dp'
-        border_radius: '10dp'
-        bg_color: app.theme_cls.primary_color
+        font_style: 'H5'
+        size_hint: (0.3,0.1)
+        md_bg_color: 0,0,0,0.5
+        radius: 30
         text: ''
         pos_hint: {'center_x': .3, 'center_y': .5}
-        md_bg_color: app.theme_cls.primary_color
-    MDFlatButton:
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+    MDRaisedButton:
         id: option2
-        width: '200dp'
-        height: '100dp'
-        border_radius: '10dp'
-        bg_color: app.theme_cls.primary_color
+        font_style: 'H5'
+        size_hint: (0.3,0.1)
+        md_bg_color: 0,0,0,0.5
+        radius: 30
         text: ''
         pos_hint: {'center_x': .7, 'center_y': .5}
-        md_bg_color: app.theme_cls.primary_color
-    MDFlatButton:
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+    MDRaisedButton:
         id: option3
-        width: '200dp'
-        height: '100dp'
-        border_radius: '10dp'
-        bg_color: app.theme_cls.primary_color
+        font_style: 'H5'
+        size_hint: (0.3,0.1)
+        md_bg_color: 0,0,0,0.5
+        radius: 30
         text: ''
         pos_hint: {'center_x': .3, 'center_y': .3}
-        md_bg_color: app.theme_cls.primary_color
-    MDFlatButton:
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+    MDRaisedButton:
         id: option4
-        color: app.theme_cls.primary_color
-        width: '200dp'
-        height: '100dp'
-        border_radius: '10dp'
+        font_style: 'H5'
+        size_hint: (0.3,0.1)
+        md_bg_color: 0,0,0,0.5
+        radius: 30
         text: ''
-        pos_hint: {'center_x': .7, 'center_y': .3}                       
+        pos_hint: {'center_x': .7, 'center_y': .3}  
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1      
+    MDProgressBar:
+        id: progress
+        value: 10
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<ProfileScreen>:
+    name: 'profile'
+    MDScreen:
+        MDLabel:
+            text: 'My Profile'
+            font_style: 'H3'
+            halign: 'center'
+            pos_hint: {'center_x': .5, 'center_y': .8}
+        MDCard:
+            size_hint: (0.3,0.3)
+            pos_hint: {'center_x': .5, 'center_y': .6}
+            radius: 30
+            Image:
+                source: 'people.jpg'
+                size_hint: (0.9, 1)
+                pos_hint: {'center_x': .5,'center_y': .5}
+                size: self.texture_size
+                halign: 'center'
+        MDLabel:
+            text: 'Name: Group 8'
+            font_style: 'H5'
+            halign: 'center'
+            pos_hint: {'center_y': .4}
+        MDLabel:
+            text: 'Email: group8@gmail.com'
+            font_style: 'H5'
+            halign: 'center'
+            pos_hint: {'center_y': .35}
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Menu'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                OneLineIconListItem:
+                                    text: "Home"
+                                    IconLeftWidget:
+                                        icon: "home"
+                                OneLineIconListItem:
+                                    text: "Profile"
+                                    IconLeftWidget:
+                                        icon: "account-circle"
+                                OneLineIconListItem:
+                                    text: "Test"
+                                    IconLeftWidget:
+                                        icon: "book"
+                                OneLineIconListItem:
+                                    text: "Logout"
+                                    IconLeftWidget:
+                                        icon: "logout"
 """
 class WelcomeScreen(Screen):
     pass
@@ -250,6 +414,8 @@ class LoginScreen(Screen):
 class SignupScreen(Screen):
     pass
 class MainScreen(Screen):
+    pass
+class ProfileScreen(Screen):
     pass
 class ContentNavigationDrawer(BoxLayout):
     pass
