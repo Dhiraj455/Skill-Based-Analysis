@@ -11,7 +11,7 @@ from kivymd.uix.list import MDList
 # from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-Window.size = (450, 700)
+Window.size = (400, 700)
 ques_ans = {
     0: {
         'question': 'How Many Continents are there in the World?',
