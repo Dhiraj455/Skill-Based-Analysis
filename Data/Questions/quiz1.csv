@@ -1,0 +1,5 @@
+id,question,option1,option2,option3,option4,answer
+1, Who developed Python Programming Language?,Wick van Rossum,Rasmus Lerdorf,Guido van Rossum,Niene Stom,3
+2,Which type of Programming does Python support?,Object Oriented,Functional,Structural,All of the mentioned,4
+3,Which of the following is the correct extension of the Python file?,py,python,pyo,pl,1
+4,Which of the following is used to define a block of code in Python language?,Indentation,Key,Brackets,All of the mentioned,1
