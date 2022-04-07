@@ -18,3 +18,9 @@ import json
 # print(dict.__contains__(1))
 # print(x.__contains__('Userinfo'))
 # print(x)
+
+f = open('user.json','w+')
+x = json.load(f)
+id = x["id"]
+id = id +1
+print(id)

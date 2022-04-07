@@ -848,17 +848,19 @@ class MainApp(MDApp):
         self.dialog.dismiss()
 
     def store_username(self):
-        id = 1
         f = open('user.json','r+')
+        self.store1 = JsonStore('id.json')
         x = json.load(f)
+        id = self.store1.get('id')["id"]
         self.username_text = self.str.get_screen('signup').ids.username_text_field.text
         self.password = self.str.get_screen('signup').ids.password_text_field.text
         self.email = self.str.get_screen('signup').ids.email_text_field.text
         if x == {}:
-            self.store.put('Userinfo0',id=id,name=self.username_text, password=self.password, email=self.email)
+            self.store.put('Userinfo0',id=id-1,name=self.username_text, password=self.password, email=self.email)
         else:
             self.store.put(f'Userinfo{id}',id=id ,name=self.username_text,email= self.email, password= self.password)
             id += 1
+            self.store1.put('id',id=id)
         self.username_changer()
     
     def username_changer(self):
