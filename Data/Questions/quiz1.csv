@@ -1,5 +1,12 @@
-id,question,option1,option2,option3,option4,answer
-1, Who developed Python Programming Language?,Wick van Rossum,Rasmus Lerdorf,Guido van Rossum,Niene Stom,3
-2,Which type of Programming does Python support?,Object Oriented,Functional,Structural,All of the mentioned,4
-3,Which of the following is the correct extension of the Python file?,py,python,pyo,pl,1
-4,Which of the following is used to define a block of code in Python language?,Indentation,Key,Brackets,All of the mentioned,1
+id,question,option1,option2,option3,option4,answer,skill
+1, Who developed Python Programming Language?,Wick van Rossum,Rasmus Lerdorf,Guido van Rossum,Niene Stom,Guido van Rossum,Python
+2,Which type of Programming does Python support?,Object Oriented,Functional,Structural,All of the mentioned,All of the mentioned
+3,Which of the following is the correct extension of the Python file?,py,python,pyo,pl,py
+4,Which of the following is used to define a block of code in Python language?,Indentation,Key,Brackets,All of the mentioned,Indentation
+5,Python is a __________ language.,High Level,Interpreted,Compiled,None of the mentioned,Interpreted
+6,Which of the following is the correct syntax to create a class named as Dog?,class := Dog,class = Dog,class Dog:,class Dog,class Dog:
+7,What is a correct syntax to output "Hello World" in Python?,print("Hello World"),echo "Hello World",echo("Hello World"),printf("Hello World"),print("Hello World")
+8,Which of the following is not a reserved word in Python?,class,for,print,exec,exec
+9,Which of the following is not a valid identifier in Python?,2name,2_names,name2,None of the above,2_names
+10,How Many Continents are there in the World?,7,8,9,10,7
+
