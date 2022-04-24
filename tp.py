@@ -79,5 +79,8 @@
 # print(res)
 # print(max(res.values()))
 
-x = "Hello\nWorld"                                                                                                                                                                                                                  
-print(x)
+# x = "Hello\nWorld"                                                                                                                                                                                                                  
+# print(x)
+# from kivy.storage.jsonstore import JsonStore
+# x = JsonStore('id.json')
+# print(x["skill"]["skill"])
