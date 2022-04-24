@@ -20,10 +20,10 @@
 # print(x)
 
 # update Csv file
-import numpy as np
-import pandas as pd
-import csv
-import matplotlib.pyplot as plt
+# import numpy as np
+# import pandas as pd
+# import csv
+# import matplotlib.pyplot as plt
 
 # df = pd.read_csv('./Data/UserData/user0.csv',usecols=["Skill","Score"])
 # print(df["Skill"])
@@ -73,8 +73,11 @@ import matplotlib.pyplot as plt
 #     print(df.iloc[i]["option3"])
 #     print(df.iloc[i]["option4"])
 #     print(df.iloc[i]["answer"])
-skill = ["Python","C++","Java"]
-score = [20,13,45]
-res = dict(zip(skill, score))
-print(res)
-print(max(res.values()))
+# skill = ["Python","C++","Java"]
+# score = [20,13,45]
+# res = dict(zip(skill, score))
+# print(res)
+# print(max(res.values()))
+
+x = "Hello\nWorld"                                                                                                                                                                                                                  
+print(x)

@@ -8,5 +8,5 @@ id,question,option1,option2,option3,option4,answer,skill
 7,What is a correct syntax to output "Hello World" in Python?,print("Hello World"),echo "Hello World",echo("Hello World"),printf("Hello World"),print("Hello World")
 8,Which of the following is not a reserved word in Python?,class,for,print,exec,exec
 9,Which of the following is not a valid identifier in Python?,2name,2_names,name2,None of the above,2_names
-10,How Many Continents are there in the World?,7,8,9,10,7
+10,Is Python case sensitive when dealing with identifiers?,No,Yes,Machine dependent,None of the above,no
 

@@ -18,10 +18,9 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.list import MDList
-from kivy.uix.screenmanager import ScreenManager, Screen
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from kivy_garden.graph import Graph  
-# from kivy.garden.matplotlib import FigureCanvasKivyAgg
+from kivy.uix.screenmanager import ScreenManager, Screen  
+from backend_kivy import FigureCanvasKivy
+# from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 Window.size = (450, 700)
 class WelcomeScreen(Screen):
@@ -87,7 +86,7 @@ sm.add_widget(AnalysisScreen(name='analysis'))
 sm.add_widget(HistoryScreen(name='history'))
 class MainApp(MDApp):
     def build(self):
-        self.str1 = Builder.load_file('file.kv')
+        self.str1 = Builder.load_file('file2.kv')
         return self.str1
 
     def on_start(self):
@@ -95,7 +94,7 @@ class MainApp(MDApp):
         f = open('user.json','r')
         x = json.load(f)
         # self.theme_cls.theme_style = "Dark"
-        # self.str1.get_screen('profile').manager.current = 'profile'
+        # self.str1.get_screen('main').manager.current = 'main'
         try:
             if x != {}:
                 self.str1.get_screen('login').manager.current = 'login'
@@ -145,11 +144,11 @@ class MainApp(MDApp):
                     print(df1)
                     x = np.array(df1["Skill"])
                     y = np.array(df1["Score"])
-                    plt.pie(y, labels = x)
-                    plt.show()
+                    plt.bar(x,y)
+                    # plt.show()
                     # plt.plot(df.Skill, df.Score)
                     # plt.show()
-                    # self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasTkAgg(plt.gcf()))
+                    self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
         except:
             pass
     def check_login(self):
@@ -342,7 +341,7 @@ class MainApp(MDApp):
     def quiz(self,skill):
         self.store1 = JsonStore('id.json')
         if skill == "Python":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/python.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "Java":
             df = pd.read_csv('./Data/Questions/quiz1.csv')
@@ -377,7 +376,7 @@ class MainApp(MDApp):
         self.store1 = JsonStore('id.json')
         score = self.store1.get('score')["score"]
         x = self.str1.get_screen(sc).ids
-        df = pd.read_csv('./Data/Questions/quiz1.csv')
+        df = pd.read_csv('./Data/Questions/python.csv')
         if x.option1.md_bg_color == [0,0,1,1]:
             if x.option1.text ==  df.iloc[int(sc[-1])-1]['answer']:
                 score += 2

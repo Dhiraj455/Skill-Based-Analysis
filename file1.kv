@@ -1,0 +1,1648 @@
+#:kivy 1.0
+ScreenManager:
+    WelcomeScreen:
+    LoginScreen:
+    SignupScreen:
+    MainScreen:
+    QuizScreen:
+    QuizScreen1:
+    QuizScreen2:
+    QuizScreen3:
+    QuizScreen4:
+    QuizScreen5:
+    QuizScreen6:
+    QuizScreen7:
+    QuizScreen8:
+    QuizScreen9:
+    QuizScreen10:
+    ResultScreen:
+    ProfileScreen:
+    AnalysisScreen:
+    HistoryScreen:
+
+<WelcomeScreen>:
+    name: 'welcome'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Welcome to Career Analysis'
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        font_style: 'Button'
+        font_size: '40sp'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .7}
+    MDRoundFlatButton:
+        text: 'Login'
+        theme_text_color: 'Custom'
+        line_color: 1, 1, 1, 1
+        text_color: 1,1,1,1
+        pos_hint: {'center_x':.3,'center_y':.2}
+        font_style: 'Subtitle1'
+        on_press:
+            root.manager.current = 'login'
+            root.manager.transition.direction = 'left'
+    MDRoundFlatButton:
+        text: 'Signup'
+        theme_text_color: 'Custom'
+        line_color: 1, 1, 1, 1
+        text_color: 1,1,1,1
+        pos_hint: {'center_x':.7,'center_y':.2}
+        font_style: 'Subtitle1'
+        on_press:
+            root.manager.current = 'signup'
+            root.manager.transition.direction = 'right'
+
+<SignupScreen>:
+    name: 'signup'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Signup'
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        font_style: 'Button'
+        font_size: '40sp'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDTextField:
+        id: username_text_field
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        hint_text: 'Username'
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        size_hint: (0.7,0.1)
+    MDTextField:
+        id: email_text_field
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        hint_text: 'Email'
+        pos_hint: {'center_x': .5, 'center_y': .6}
+        size_hint: (0.7,0.1)
+    MDTextField:
+        id: password_text_field
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        hint_text: 'Password'
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        required: True
+        size_hint: (0.7,0.1)
+        password: True
+    MDFloatingActionButton:
+        id: signup_fab
+        icon: 'check'
+        md_bg_color: app.theme_cls.primary_color
+        user_font_size: '40sp'
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        on_press: 
+            app.store_username()
+            root.manager.current = 'login'
+            root.manager.transition.direction = 'down'
+    MDRoundFlatButton:
+        text: 'Back'
+        theme_text_color: 'Custom'
+        line_color: 1, 1, 1, 1
+        text_color: 1,1,1,1
+        pos_hint: {'center_x':.2,'center_y':.3}
+        font_style: 'Subtitle1'
+        on_press:
+            root.manager.current = 'welcome'
+            root.manager.transition.direction = 'left'
+    MDRoundFlatButton:
+        text: 'Login'
+        theme_text_color: 'Custom'
+        line_color: 1, 1, 1, 1
+        text_color: 1,1,1,1
+        pos_hint: {'center_x':.8,'center_y':.3}
+        font_style: 'Subtitle1'
+        on_press:
+            root.manager.current = 'login'
+            root.manager.transition.direction = 'right'
+<LoginScreen>:
+    name: 'login'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Login'
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        font_style: 'Button'
+        font_size: '40sp'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDTextField:
+        id: username_text_field
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        hint_text: 'Username'
+        pos_hint: {'center_x': .5, 'center_y': .7}
+        required: True
+        size_hint: (0.7,0.1)
+    MDTextField:
+        id: password_text_field
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        hint_text: 'Password'
+        pos_hint: {'center_x': .5, 'center_y': .5}
+        required: True
+        size_hint: (0.7,0.1)
+        password: True
+    MDFloatingActionButton:
+        icon: 'check'
+        md_bg_color: app.theme_cls.primary_color
+        user_font_size: '40sp'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            app.check_username()
+    MDFloatingActionButton:
+        id: main_button
+        icon: 'arrow-right'
+        disabled: True
+        md_bg_color: app.theme_cls.primary_color
+        user_font_size: '40sp'
+        pos_hint: {'center_x': .8, 'center_y': .2}
+        on_press:
+            root.manager.current = 'main'
+            root.manager.transition.direction = 'right'
+            app.check_login()
+    MDRoundFlatButton:
+        text: 'Signup'
+        theme_text_color: 'Custom'
+        line_color: 1, 1, 1, 1
+        text_color: 1,1,1,1
+        pos_hint: {'center_x':.2,'center_y':.2}
+        font_style: 'Subtitle1'
+        font_size: '15sp'
+        on_press:
+            root.manager.current = 'signup'
+            root.manager.transition.direction = 'right'
+<MainScreen>:
+    name: 'main'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Career Analysis For Student'
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDLabel:
+        text: 'Skills'
+        font_style: 'H6'
+        halign: 'center'
+        pos_hint: {'center_x': .1, 'center_y': .7}
+    MDCard:
+        size_hint: (0.4,0.1)
+        pos_hint: {'center_x': .25, 'center_y': .6}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '    Python'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz('Python')
+    MDCard:
+        size_hint: (0.4,0.1)
+        pos_hint: {'center_x': .75, 'center_y': .6}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '   Java'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz("Java")
+    MDCard:
+        size_hint: (0.4,0.1)
+        pos_hint: {'center_x': .25, 'center_y': .45}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '   Javascript'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz('Javascript')
+    MDCard:
+        size_hint: (0.4,0.1)
+        pos_hint: {'center_x': .75, 'center_y': .45}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '   C++'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz('C++')
+    MDCard:
+        size_hint: (0.9,0.1)
+        pos_hint: {'center_x': .5, 'center_y': .3}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '   Graphic Design'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz('Graphic Design')
+    MDCard:
+        size_hint: (0.9,0.1)
+        pos_hint: {'center_x': .5, 'center_y': .15}
+        md_bg_color: 0,0,0,0.5
+        radius: 10
+        MDLabel:
+            text: '   Web Development'
+            font_style: 'H6'
+            halign: 'left'
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            pos_hint: {'center_y': .5}
+        MDIconButton:
+            icon: 'plus'
+            user_font_size: '40sp'
+            pos_hint: {'center_x': .9, 'center_y': .5}
+            theme_text_color: 'Custom'
+            text_color: 1,1,1,1
+            on_press:
+                root.manager.current = 'quiz'
+                root.manager.transition.direction = 'left'
+                app.quiz('Web Development')
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Home'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            theme_text_color: 'Primary'
+                            md_bg_color: 0,0,0,0.65
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                md_bg_color: 0,0,0,0.6
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    # text_color: 1,1,1,1
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Button"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        theme_text_color: 'Custom'
+                        text_color: 1,1,1,1
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'  
+    MDFloatingActionButton:
+        icon: 'account'
+        md_bg_color: 1,1,1,0.1
+        user_font_size: '50sp'
+        pos_hint: {'center_x': .9, 'center_y': .915}
+        on_press:
+            root.manager.current = 'profile'
+            root.manager.transition.direction = 'up' 
+
+<HistoryScreen>:
+    name: 'history'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Recent Activities'
+        font_style: 'H5'
+        halign: 'center'
+        theme_text_color: 'Custom'
+        text_color: 1,1,1,1
+        pos_hint: {'center_x': .5, 'center_y': .87}
+    MDCard:
+        id: status
+        text : "4"
+        size_hint: (0.9, 0.7)
+        pos_hint: {'center_x': .5, 'center_y': .48}
+    MDFloatingActionButton:
+        icon: 'magnify'
+        md_bg_color: app.theme_cls.primary_color
+        user_font_size: '40sp'
+        pos_hint: {'center_x': .9, 'center_y': .07}
+        on_press:
+            root.manager.current = 'analysis'
+            root.manager.transition.direction = 'left'
+            app.analysis()
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'History'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            theme_text_color: 'Primary'
+                            md_bg_color: 0,0,0,0.65
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                md_bg_color: 0,0,0,0.6
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    # md_bg_color: 0,0,0,0.5
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        theme_text_color: 'Custom'
+                        text_color: 1,1,1,1
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
+
+<QuizScreen>:
+    name: 'quiz'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        MDToolbar:
+            title: 'Quiz'
+            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+            elevation:5
+        Widget:
+    MDLabel:
+        text: 'Start Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_y': .5}
+    MDFlatButton:
+        text: 'Start'
+        pos_hint: {'center_x': .5, 'center_y': .4}
+        on_release: 
+            root.manager.current = 'quiz1'
+            root.manager.transition.direction = 'left'
+    MDNavigationDrawer:
+        id: nav_drawer
+        md_bg_color: 0,0,0,0.6
+        ContentNavigationDrawer:
+            orientation: 'vertical'
+            padding: "15dp"
+            spacing: "15dp"
+            MDLabel:
+                text: "Menu"
+                font_style: "Subtitle1"
+                size_hint_y: None
+                height: self.texture_size[1]
+                theme_text_color: 'Custom'
+                text_color: 1,1,1,1
+            ScrollView:
+                DrawerList:
+                    id: md_list
+                    MDList:
+                        MDFillRoundFlatIconButton:
+                            icon: "home"
+                            text: "Home"
+                            font_style: "Button"
+                            md_bg_color: 1,1,1,0.3
+                            font_size: "20sp"
+                            padding: "10dp"
+                            on_press: 
+                                root.manager.current = 'main'
+                                root.manager.transition.direction = 'left'
+                        MDFlatButton:
+                            text: ""
+                        MDFillRoundFlatIconButton:
+                            icon: "account-circle"
+                            text: "Profile"
+                            font_style: "Button"
+                            md_bg_color: 1,1,1,0.3
+                            font_size: "20sp"
+                            padding: "10dp"
+                            on_press: 
+                                root.manager.current = 'profile'
+                                root.manager.transition.direction = 'left'
+                        MDFlatButton:
+                            text: ""
+                        MDFillRoundFlatIconButton:
+                            icon: "history"
+                            text: "History"
+                            font_style: "Button"
+                            md_bg_color: 1,1,1,0.3
+                            font_size: "20sp"
+                            padding: "10dp"
+                            on_release: 
+                                root.manager.current = 'history'
+                                root.manager.transition.direction = 'left'
+                                app.show_history()
+                        MDFlatButton:
+                            text: ""
+                        MDFillRoundFlatIconButton:
+                            icon: "logout"
+                            text: "Logout"
+                            font_style: "Button"
+                            md_bg_color: 1,1,1,0.3
+                            font_size: "20sp"
+                            padding: "10dp"
+                            on_press: 
+                                root.manager.current = 'signup'
+                                root.manager.transition.direction = 'left'
+                        
+<QuizScreen1>:       
+    name: 'quiz1'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz1")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz1")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz1")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz1")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz2'
+            root.manager.transition.direction = 'left'
+            app.next("quiz1")
+    MDProgressBar:
+        id: progress
+        value: 10
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen2>:       
+    name: 'quiz2'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz2")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz2")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz2")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz2")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz3'
+            root.manager.transition.direction = 'left'
+            app.next("quiz2")
+    MDProgressBar:
+        id: progress
+        value: 20
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen3>:       
+    name: 'quiz3'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz3")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz3")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz3")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz3")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz4'
+            root.manager.transition.direction = 'left'
+            app.next("quiz3")
+    MDProgressBar:
+        id: progress
+        value: 30
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen4>:       
+    name: 'quiz4'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz4")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz4")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz4")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz4")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz5'
+            root.manager.transition.direction = 'left'
+            app.next("quiz4")
+    MDProgressBar:
+        id: progress
+        value: 40
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen5>:       
+    name: 'quiz5'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz5")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz5")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz5")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz5")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz6'
+            root.manager.transition.direction = 'left'
+            app.next("quiz5")
+    MDProgressBar:
+        id: progress
+        value: 50
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen6>:       
+    name: 'quiz6'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz6")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz6")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz6")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz6")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz7'
+            root.manager.transition.direction = 'left'
+            app.next("quiz6")
+    MDProgressBar:
+        id: progress
+        value: 60
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen7>:       
+    name: 'quiz7'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz7")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz7")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz7")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz7")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz8'
+            root.manager.transition.direction = 'left'
+            app.next("quiz7")
+    MDProgressBar:
+        id: progress
+        value: 70
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen8>:       
+    name: 'quiz8'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz8")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz8")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz8")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz8")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz9'
+            root.manager.transition.direction = 'left'
+            app.next("quiz8")
+    MDProgressBar:
+        id: progress
+        value: 80
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen9>:       
+    name: 'quiz9'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz9")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz9")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz9")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz9")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'quiz10'
+            root.manager.transition.direction = 'left'
+            app.next("quiz9")
+    MDProgressBar:
+        id: progress
+        value: 90
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<QuizScreen10>:       
+    name: 'quiz10'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .9}
+    MDLabel:
+        id: question
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDFillRoundFlatButton:
+        id: option1
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .6}
+        on_press: app.check1("quiz10")
+    MDFillRoundFlatButton:
+        id: option2
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .6}
+        on_press: app.check2("quiz10")
+    MDFillRoundFlatButton:
+        id: option3
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .3, 'center_y': .4}
+        on_press: app.check3("quiz10")
+    MDFillRoundFlatButton:
+        id: option4
+        text: ''
+        font_style: 'H6'
+        size_hint: (0.4,0.1)
+        radius: 30
+        md_bg_color: 0, 0, 1, 0
+        theme_text_color: 'Primary'
+        pos_hint: {'center_x': .7, 'center_y': .4}
+        on_press: app.check4("quiz10")
+    MDFlatButton:
+        text: 'Next'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press: 
+            root.manager.current = 'result'
+            root.manager.transition.direction = 'left'
+            app.next("quiz10")
+            app.result()
+    MDProgressBar:
+        id: progress
+        value: 100
+        size_hint: (0.7, 0.05)
+        pos_hint: {'center_x': .5, 'center_y': .1}
+<ResultScreen>:
+    name: 'result'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDLabel:
+        text: 'Skill Quiz'
+        font_style: 'H3'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .8}
+    MDLabel:
+        id: result
+        text: ''
+        font_style: 'H4'
+        halign: 'center'
+        pos_hint: {'center_x': .5, 'center_y': .6}
+    MDFlatButton:
+        text: 'Home'
+        pos_hint: {'center_x': .5, 'center_y': .2}
+        on_press:
+            root.manager.current = 'main'
+            root.manager.transition.direction = 'right'
+<ProfileScreen>:
+    name: 'profile'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            MDScreen:
+                size_hint_y: 1
+                MDLabel:
+                    text: 'My Profile'
+                    font_style: 'H3'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .85}
+                MDLabel:
+                    id: name
+                    text: ''
+                    font_style: 'H5'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .75}
+                MDLabel:
+                    id: email
+                    text: ''
+                    font_style: 'H5'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .7}
+                MDLabel:
+                    text: 'Status'
+                    font_style: 'H4'
+                    pos_hint: {'center_x': .6,'center_y': .6}
+                MDCard:
+                    id: status
+                    text : "4"
+                    size_hint: (0.9, 0.4)
+                    pos_hint: {'center_x': .5, 'center_y': .35}
+                MDFloatingActionButton:
+                    icon: 'magnify'
+                    md_bg_color: app.theme_cls.primary_color
+                    user_font_size: '40sp'
+                    pos_hint: {'center_x': .9, 'center_y': .07}
+                    on_press:
+                        root.manager.current = 'analysis'
+                        root.manager.transition.direction = 'left'
+                        app.analysis()
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Profile'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            theme_text_color: 'Primary'
+                            md_bg_color: 0,0,0,0.65
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                md_bg_color: 0,0,0,0.6
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        theme_text_color: 'Custom'
+                        text_color: 1,1,1,1
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
+<AnalysisScreen>:
+    name: 'analysis'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    BoxLayout:
+        orientation: 'vertical'
+        ScrollView:
+            do_scroll_x: False
+            do_scroll_y: True
+            MDScreen:
+                size_hint_y: 1
+                MDLabel:
+                    text: 'Analysis'
+                    font_style: 'H3'
+                    halign: 'center'
+                    pos_hint: {'center_x': .5, 'center_y': .85}
+                MDCard:
+                    id: analysis
+                    size_hint: (0.9, 0.37)
+                    pos_hint: {'center_x': .5, 'center_y': .6}
+                MDCard:
+                    size_hint: (0.9, 0.1)
+                    pos_hint: {'center_x': .5, 'center_y': .3}
+                    radius: 10
+                    MDLabel:
+                        text: '   Strong Skill'
+                        font_style: 'Button'
+                        font_size: '20sp'
+                        pos_hint: {'center_x': .3,'center_y': .5}
+                    MDLabel:
+                        id: strong
+                        text: ''
+                        font_style: 'Subtitle1'
+                        font_size: '15sp'
+                        halign: 'center'
+                        pos_hint: {'center_x': .7, 'center_y': .5}
+                MDCard:
+                    size_hint: (0.9, 0.1)
+                    pos_hint: {'center_x': .5, 'center_y': .15}
+                    radius: 10
+                    MDLabel:
+                        text: '   Weak Skill'
+                        font_style: 'Button'
+                        font_size: '20sp'
+                        pos_hint: {'center_x': .3,'center_y': .5}
+                    MDLabel:
+                        id: weak
+                        text: ''
+                        font_style: 'Subtitle1'
+                        font_size: '15sp'
+                        halign: 'center'
+                        pos_hint: {'center_x': .7, 'center_y': .5}
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Analysis'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            theme_text_color: 'Primary'
+                            md_bg_color: 0,0,0,0.65
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                md_bg_color: 0,0,0,0.6
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        theme_text_color: 'Custom'
+                        text_color: 1,1,1,1
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 1,1,1,0.3
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
