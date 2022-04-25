@@ -452,7 +452,7 @@ ScreenManager:
         pos_hint: {'center_x': .5, 'center_y': .48}
     MDFloatingActionButton:
         icon: 'magnify'
-        md_bg_color: app.theme_cls.primary_color
+        md_bg_color: 0,0,0,1
         user_font_size: '40sp'
         pos_hint: {'center_x': .9, 'center_y': .07}
         on_press:
@@ -567,70 +567,87 @@ ScreenManager:
         on_release: 
             root.manager.current = 'quiz1'
             root.manager.transition.direction = 'left'
-    MDNavigationDrawer:
-        id: nav_drawer
-        ContentNavigationDrawer:
-            orientation: 'vertical'
-            padding: "15dp"
-            spacing: "15dp"
-            md_bg_color: 1,1,1,0.65
-            specific_text_color: 0,0,0,1
-            MDLabel:
-                text: "Menu"
-                font_style: "Subtitle1"
-                size_hint_y: None
-                height: self.texture_size[1]
-            ScrollView:
-                DrawerList:
-                    id: md_list
-                    MDList:
-                        MDFillRoundFlatIconButton:
-                            icon: "home"
-                            text: "Home"
-                            font_style: "Button"
-                            md_bg_color: 0,0,0,0.8
-                            font_size: "20sp"
-                            padding: "10dp"
-                            on_press: 
-                                root.manager.current = 'main'
-                                root.manager.transition.direction = 'left'
-                        MDFlatButton:
-                            text: ""
-                        MDFillRoundFlatIconButton:
-                            icon: "account-circle"
-                            text: "Profile"
-                            font_style: "Button"
-                            md_bg_color: 0,0,0,0.8
-                            font_size: "20sp"
-                            padding: "10dp"
-                            on_press: 
-                                root.manager.current = 'profile'
-                                root.manager.transition.direction = 'left'
-                        MDFlatButton:
-                            text: ""
-                        MDFillRoundFlatIconButton:
-                            icon: "history"
-                            text: "History"
-                            font_style: "Button"
-                            md_bg_color: 0,0,0,0.8
-                            font_size: "20sp"
-                            padding: "10dp"
-                            on_release: 
-                                root.manager.current = 'history'
-                                root.manager.transition.direction = 'left'
-                                app.show_history()
-                        MDFlatButton:
-                            text: ""
-                        MDFillRoundFlatIconButton:
-                            icon: "logout"
-                            text: "Logout"
-                            font_style: "Button"
-                            md_bg_color: 0,0,0,0.8
-                            font_size: "20sp"
-                            padding: "10dp"
-                            on_press: 
-                                root.manager.current = 'signup'
-                                root.manager.transition.direction = 'left'
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Quiz'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            md_bg_color: 1,1,1,0.65
+                            specific_text_color: 0,0,0,1
+                            # text_color: 0,0,0,1
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    # text_color: 1,1,1,1
+                    md_bg_color: 1,1,1,0.7
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Button"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                        theme_text_color: 'Primary'
+                        md_bg_color: 1,1,1,0.65
+                        # text_color: 0.4,0.29,0.87,1
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
                         
 <QuizScreen1>:       
     name: 'quiz1'
@@ -1546,6 +1563,7 @@ ScreenManager:
                     pos_hint: {'center_x': .5, 'center_y': .85}
                 MDCard:
                     id: analysis
+                    text: ""
                     size_hint: (0.9, 0.37)
                     pos_hint: {'center_x': .5, 'center_y': .6}
                 MDCard:

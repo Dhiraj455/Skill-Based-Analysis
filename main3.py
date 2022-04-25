@@ -143,7 +143,12 @@ class MainApp(MDApp):
                     # plt.show()
                     # plt.plot(df.Skill, df.Score)
                     # plt.show()
-                    self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                    if self.str1.get_screen('analysis').ids.analysis.text == "":
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                        self.str1.get_screen('analysis').ids.analysis.text = "1"
+                    else:
+                        self.str1.get_screen('analysis').ids.analysis.clear_widgets()
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
         except:
             pass
     def check_login(self):
@@ -271,6 +276,7 @@ class MainApp(MDApp):
             elevation = 4,)
         if self.str1.get_screen('profile').ids.status.text == "":
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text="1"
         else:
             self.str1.get_screen('profile').ids.status.clear_widgets()
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
@@ -309,6 +315,7 @@ class MainApp(MDApp):
         print(main_list)
         if self.str1.get_screen('history').ids.status.text == "":
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text = "1"
         else:
             self.str1.get_screen('history').ids.status.clear_widgets()
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
