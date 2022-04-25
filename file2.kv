@@ -19,6 +19,8 @@ ScreenManager:
     ProfileScreen:
     AnalysisScreen:
     HistoryScreen:
+    RecommendScreen1:
+    RecommendScreen2:
 
 <WelcomeScreen>:
     name: 'welcome'
@@ -1567,8 +1569,8 @@ ScreenManager:
                     size_hint: (0.9, 0.37)
                     pos_hint: {'center_x': .5, 'center_y': .6}
                 MDCard:
-                    size_hint: (0.9, 0.1)
-                    pos_hint: {'center_x': .5, 'center_y': .3}
+                    size_hint: (0.93, 0.1)
+                    pos_hint: {'center_x': .5, 'center_y': .32}
                     radius: 10
                     MDLabel:
                         text: '   Strong Skill'
@@ -1581,10 +1583,18 @@ ScreenManager:
                         font_style: 'Subtitle1'
                         font_size: '15sp'
                         halign: 'center'
-                        pos_hint: {'center_x': .7, 'center_y': .5}
+                        pos_hint: {'center_x': .53, 'center_y': .5}
+                    MDFloatingActionButton:
+                        icon: 'archive'
+                        md_bg_color: 0,0,0,1
+                        pos_hint: {'center_x': .75, 'center_y': .5}
+                        on_press:
+                            app.recommend("recommend1")
+                            root.manager.current = 'recommend1'
+                            root.manager.transition.direction = 'left'
                 MDCard:
-                    size_hint: (0.9, 0.1)
-                    pos_hint: {'center_x': .5, 'center_y': .15}
+                    size_hint: (0.93, 0.1)
+                    pos_hint: {'center_x': .5, 'center_y': .18}
                     radius: 10
                     MDLabel:
                         text: '   Weak Skill'
@@ -1597,7 +1607,15 @@ ScreenManager:
                         font_style: 'Subtitle1'
                         font_size: '15sp'
                         halign: 'center'
-                        pos_hint: {'center_x': .7, 'center_y': .5}
+                        pos_hint: {'center_x': .53, 'center_y': .5}
+                    MDFloatingActionButton:
+                        icon: 'archive'
+                        md_bg_color: 0,0,0,1
+                        pos_hint: {'center_x': .75, 'center_y': .5}
+                        on_press:
+                            app.recommend("recommend2")
+                            root.manager.current = 'recommend2'
+                            root.manager.transition.direction = 'left'
     MDScreen:
         MDNavigationLayout:
             ScreenManager:
@@ -1606,6 +1624,436 @@ ScreenManager:
                         orientation: 'vertical'
                         MDToolbar:
                             title: 'Analysis'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            # theme_text_color: 'Primary'
+                            # md_bg_color: 0,0,0,0.65
+                            md_bg_color: 1,1,1,0.65
+                            specific_text_color: 0,0,0,1
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
+<RecommendScreen1>:
+    name: 'recommend1'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDCard:
+        size_hint: (0.9, 0.85)
+        pos_hint: {'center_x': .5, 'center_y': .46}
+        radius: 10
+        BoxLayout:
+            orientation: 'vertical'
+            padding: "15dp"
+            spacing: "15dp"
+            MDCard:
+                id: item1
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .9}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item1_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item1_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend1","item1_label")
+            MDCard:
+                id: item2
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .75}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item2_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item2_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend1","item2_label")
+            MDCard:
+                id: item3
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .6}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item3_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item3_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend1","item3_label")
+            MDCard:
+                id: item4
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .45}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item4_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item4_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend1","item4_label")
+            MDCard:
+                id: item5
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .3}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item5_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item5_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend1","item5_label")
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Recommendation'
+                            left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
+                            # theme_text_color: 'Primary'
+                            # md_bg_color: 0,0,0,0.65
+                            md_bg_color: 1,1,1,0.65
+                            specific_text_color: 0,0,0,1
+                            elevation:5
+                        Widget:
+            MDNavigationDrawer:
+                id: nav_drawer
+                ContentNavigationDrawer:
+                    orientation: 'vertical'
+                    padding: "15dp"
+                    spacing: "15dp"
+                    MDLabel:
+                        text: "Menu"
+                        font_style: "Subtitle1"
+                        size_hint_y: None
+                        height: self.texture_size[1]
+                    ScrollView:
+                        DrawerList:
+                            id: md_list
+                            MDList:
+                                MDFillRoundFlatIconButton:
+                                    icon: "home"
+                                    text: "Home"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'main'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "account-circle"
+                                    text: "Profile"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'profile'
+                                        root.manager.transition.direction = 'left'
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "history"
+                                    text: "History"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_release: 
+                                        root.manager.current = 'history'
+                                        root.manager.transition.direction = 'left'
+                                        app.show_history()
+                                MDFlatButton:
+                                    text: ""
+                                MDFillRoundFlatIconButton:
+                                    icon: "logout"
+                                    text: "Logout"
+                                    font_style: "Button"
+                                    md_bg_color: 0,0,0,0.8
+                                    font_size: "20sp"
+                                    padding: "10dp"
+                                    on_press: 
+                                        root.manager.current = 'signup'
+                                        root.manager.transition.direction = 'left'
+<RecommendScreen2>:
+    name: 'recommend2'
+    canvas.before:
+        Color:
+            rgba: (1, 1, 1, 1)
+        Rectangle:
+            source:'./Images/background.jpg'
+            size: root.width, root.height
+            pos: self.pos
+    MDCard:
+        size_hint: (0.9, 0.85)
+        pos_hint: {'center_x': .5, 'center_y': .46}
+        radius: 10
+        BoxLayout:
+            orientation: 'vertical'
+            padding: "15dp"
+            spacing: "15dp"
+            MDCard:
+                id: item1
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .9}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item1_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item1_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend2","item1_label")
+            MDCard:
+                id: item2
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .75}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item2_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item2_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend2","item2_label")
+            MDCard:
+                id: item3
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .6}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item3_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item3_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend2","item3_label")
+            MDCard:
+                id: item4
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .45}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item4_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item4_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend2","item4_label")
+            MDCard:
+                id: item5
+                size_hint: (0.9, 0.1)
+                line_color:(0.2, 0.2, 0.2, 0.8)
+                pos_hint: {'center_x': .5, 'center_y': .3}
+                radius: 10
+                md_bg_color: 0,0,0,0.5
+                MDLabel:
+                    id: item5_label
+                    text: ""
+                    font_style: "Subtitle1"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    halign: 'center'
+                    pos_hint: {'center_x': .4, 'center_y': .5}
+                MDFlatButton:
+                    id: item5_button
+                    radius: 20
+                    text: "Go"
+                    theme_text_color: 'Custom'
+                    text_color: 1,1,1,1
+                    pos_hint: {'center_x': .7, 'center_y': .5}
+                    on_press:
+                        app.web("recommend2","item5_label")
+
+
+    MDScreen:
+        MDNavigationLayout:
+            ScreenManager:
+                MDScreen:
+                    BoxLayout:
+                        orientation: 'vertical'
+                        MDToolbar:
+                            title: 'Recommendation'
                             left_action_items: [["menu", lambda x: nav_drawer.set_state("open")]]
                             # theme_text_color: 'Primary'
                             # md_bg_color: 0,0,0,0.65

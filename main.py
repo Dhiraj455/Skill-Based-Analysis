@@ -1,5 +1,4 @@
-#Hello World Page Using KivyMd
-from tabnanny import check
+import webbrowser
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -11,6 +10,9 @@ from kivy.storage.jsonstore import JsonStore
 import json
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.screen import Screen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
@@ -65,6 +67,13 @@ class AnalysisScreen(Screen):
     pass
 class HistoryScreen(Screen):
     pass
+
+class RecommendScreen1(Screen):
+    pass
+class RecommendScreen2(Screen):
+    pass
+class MD3Card(MDCard):
+    pass
 sm = ScreenManager()
 sm.add_widget(WelcomeScreen(name='welcome'))
 sm.add_widget(LoginScreen(name='login'))
@@ -84,6 +93,8 @@ sm.add_widget(QuizScreen10(name='quiz10'))
 sm.add_widget(ResultScreen(name='result'))
 sm.add_widget(AnalysisScreen(name='analysis'))
 sm.add_widget(HistoryScreen(name='history'))
+sm.add_widget(RecommendScreen1(name='recommend1'))
+sm.add_widget(RecommendScreen2(name='recommend2'))
 class MainApp(MDApp):
     def build(self):
         self.str1 = Builder.load_file('file2.kv')
@@ -143,7 +154,12 @@ class MainApp(MDApp):
                     # plt.show()
                     # plt.plot(df.Skill, df.Score)
                     # plt.show()
-                    self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                    if self.str1.get_screen('analysis').ids.analysis.text == "":
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                        self.str1.get_screen('analysis').ids.analysis.text = "1"
+                    else:
+                        self.str1.get_screen('analysis').ids.analysis.clear_widgets()
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
         except:
             pass
     def check_login(self):
@@ -271,6 +287,7 @@ class MainApp(MDApp):
             elevation = 4,)
         if self.str1.get_screen('profile').ids.status.text == "":
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text="1"
         else:
             self.str1.get_screen('profile').ids.status.clear_widgets()
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
@@ -309,6 +326,7 @@ class MainApp(MDApp):
         print(main_list)
         if self.str1.get_screen('history').ids.status.text == "":
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text = "1"
         else:
             self.str1.get_screen('history').ids.status.clear_widgets()
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
@@ -467,4 +485,42 @@ class MainApp(MDApp):
         self.store1.put('score',score=x)
         self.username_changer()
 
+    def recommend(self,screen):
+        print("Hello")
+        df = pd.read_csv('./Data/recommend.csv')
+        topics = []
+        if screen == "recommend1":
+            x = self.str1.get_screen('analysis').ids.strong.text
+        elif screen == 'recommend2':
+            x = self.str1.get_screen('analysis').ids.weak.text
+        for i in range(0,len(df)):
+            if x == df.iloc[i]['Skill']:
+                topics.append(df.iloc[i]['Topic'])
+        print(topics)
+        self.str1.get_screen(screen).ids.item1_label.text = topics[-5]
+        self.str1.get_screen(screen).ids.item2_label.text = topics[-4]
+        self.str1.get_screen(screen).ids.item3_label.text = topics[-3]
+        self.str1.get_screen(screen).ids.item4_label.text = topics[-2]
+        self.str1.get_screen(screen).ids.item5_label.text = topics[-1]
+
+    def web(self,screen,item):
+        if item == "item1_label":
+            x = self.str1.get_screen(screen).ids.item1_label.text
+        elif item == "item2_label":
+            x = self.str1.get_screen(screen).ids.item2_label.text
+        elif item == "item3_label":
+            x = self.str1.get_screen(screen).ids.item3_label.text
+        elif item == "item4_label":
+            x = self.str1.get_screen(screen).ids.item4_label.text
+        elif item == "item5_label":
+            x = self.str1.get_screen(screen).ids.item5_label.text
+        df = pd.read_csv('./Data/recommend.csv')
+        for i in range(0,len(df)):
+            if x == df.iloc[i]['Topic']:
+                y = df.iloc[i]['Link']
+                print(y)
+                webbrowser.open(y)
+                break
+            else:
+                pass
 MainApp().run()
