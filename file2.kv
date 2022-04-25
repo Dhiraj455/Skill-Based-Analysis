@@ -1400,22 +1400,33 @@ ScreenManager:
                     font_style: 'H3'
                     halign: 'center'
                     pos_hint: {'center_x': .5, 'center_y': .85}
-                Image:
-                    source: './Images/profile.jpg'
-                    size_hint: (0.43, 0.6)
+                MDFloatingActionButton:
+                    icon: 'account'
+                    md_bg_color: 0,0,0,1
+                    user_font_size: '50dp'
+                #    size_hint: (0.43, 0.17)
                     pos_hint: {'center_x': .23, 'center_y': .7}
+                #    elevation_normal: 10
+                #MDCard:
+                #    size_hint: (0.43, 0.17)
+                #    pos_hint: {'center_x': .23, 'center_y': .7}
+                #    radius: 50
+                #    Image:
+                #        source: './Images/profile.jpg'
+                #        size_hint: (0.7,0.7)
+                        
                 MDLabel:
                     id: name
                     text: ''
                     font_style: 'H5'
                     halign: 'center'
-                    pos_hint: {'center_x': .53, 'center_y': .73}
+                    pos_hint: {'center_x': .47, 'center_y': .73}
                 MDLabel:
                     id: email
                     text: ''
                     font_style: 'H5'
                     halign: 'center'
-                    pos_hint: {'center_x': .7, 'center_y': .68}
+                    pos_hint: {'center_x': .64, 'center_y': .68}
                 MDLabel:
                     text: 'Status'
                     font_style: 'H4'
@@ -1428,7 +1439,7 @@ ScreenManager:
                     pos_hint: {'center_x': .5, 'center_y': .325}
                 MDFloatingActionButton:
                     icon: 'magnify'
-                    md_bg_color: app.theme_cls.primary_color
+                    md_bg_color: 0,0,0,1
                     user_font_size: '40sp'
                     pos_hint: {'center_x': .9, 'center_y': .07}
                     on_press:

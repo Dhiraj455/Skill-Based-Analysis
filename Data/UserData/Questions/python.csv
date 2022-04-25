@@ -1,0 +1,11 @@
+id,question,option1,option2,option3,option4,answer
+1,What are the values of the following Python expressions?2**(3**2) (2**3)**2 2**3**2,512 64 512,512 512 512,64 512 64,64 64 64,512 64 512
+2,What will be the output of the following Python function? min(max(False;-3;-4);2;7),-4,-3,2,False,False
+3,What will be the output of the following Python code snippet? for i in;[1; 2; 3; 4][::-1]: print (i),4321,Error,1234,None of the above,4321
+4,Is Python case sensitive when dealing with identifiers?,No,Yes,Machine dependent,None of the above,no
+5,Is Python code compiled or interpreted?,Python code is both compiled and interpreted,Python code is neither compiled nor interpreted,Python code is only compiled,Python code is only interpreted,Python code is neither compiled nor interpreted
+6,What will be the output of the following Python code? i = 1 while True: if i%3 == 0: break print(i) i + = 1,1 2 3,Error,1 2,None of the Mentioned,Error
+7,What will be the output of the following Python code snippet if x=1? X<<2,4,2,1,8,4
+8,What will be the output of the following Python expression if x=56.236? Print(”%.2f”%x),56.236,56.23,56.0000,56.24,56.24
+9,What will be the output of the following Python function? len([“hello”;2;4;6]),Error,6,4,3,4
+10,What will be the output of the following Python code? x = 'abcd' for i in x: print(i.upper()),aBCD,ABCD,abcd,abCD,ABCD      
