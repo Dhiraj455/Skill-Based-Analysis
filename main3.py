@@ -160,6 +160,8 @@ class MainApp(MDApp):
                     else:
                         self.str1.get_screen('analysis').ids.analysis.clear_widgets()
                         self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                    # self.str1.get_screen('analysis').manager.current = 'analysis'
+                    # self.str1.get_screen('analysis').manager.transition.direction = 'left'
         except:
             pass
     def check_login(self):
@@ -385,19 +387,19 @@ class MainApp(MDApp):
             df = pd.read_csv('./Data/Questions/quiz1.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "Java":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/java.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "C++":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/c++.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "Graphic Design":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/graphic.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "Web Development":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/web.csv')
             self.store1.put('skill',skill=skill)
         elif skill == "Javascript":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/javascript.csv')
             self.store1.put('skill',skill=skill)
         else:
             cancel_btn_username_dialogue = MDFlatButton(text="Retry", on_release=self.close_username_dialogue)
@@ -420,15 +422,15 @@ class MainApp(MDApp):
         if self.store1["skill"]["skill"] == "Python":
             df = pd.read_csv('./Data/Questions/quiz1.csv')
         elif self.store1["skill"]["skill"] == "Java":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/java.csv')
         elif self.store1["skill"]["skill"] == "C++":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/c++.csv')
         elif self.store1["skill"]["skill"] == "Graphic Design":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/graphic.csv')
         elif self.store1["skill"]["skill"] == "Web Development":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/web.csv')
         elif self.store1["skill"]["skill"] == "Javascript":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/javascript.csv')
         else:
             pass                                               
         if x.option1.md_bg_color == [0,0,1,1]:

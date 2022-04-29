@@ -1,0 +1,11 @@
+id,question,option1,option2,option3,option4,answer
+1,Which of these is a genuine tag keyword?,Header,Bold,Body,Image,Body
+2,What is the correct tag for a line break?,"brk/","line/","bk/","br/","br/"
+3,Choose the correct HTML tag for the largest heading,<heading>,<h6>,<head>,<h1>,<h1>
+4,How many colour names are used by the browsers?,16,8,12,10,16
+5,Which tag is used to display text in title bar of a web document?,Body,Meta,Title,Comment,Title
+6,The ____ attribute is used to identify the values of variables.,text,http-equiv,content,name,content
+7,Which are used with a tag to modify its function?,Files,Functions,Attributes,Documents,Attributes
+8,____ is a collection of controls in HTML.,Form,Field,Table,Frame,Form
+9,HTML allows us to create three different kinds of ___,Functions,Events,Files,Lists,Lists
+10,____ files are more compact than the GIF files.,.JPG and JPEG,.JPG,.JPEG,None 

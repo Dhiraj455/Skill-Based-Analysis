@@ -1,0 +1,11 @@
+id,question,option1,option2,option3,option4,answer
+1,Iterator returned by Hashtable on key;value and entry are?,Fail-fast,Both,None,Fail-safe,Fail-fast
+2,Which allows the removal of elements from a collection?,Enumeration,Iterator,Both,None of the above,None of the above
+3,Which of those doesn’t have an index based structure?,List,Set,Map,All,Set
+4,java.util.Collections is a:,Class,Interface,Object,None of the above,Class
+5,LinkedHashSet implements:,Cloneable,Set,All,Serializable,All
+6,Which of those allows duplicate elements?,Set,List,All,None of the above,List
+7,Which allows the storage of a null key and null values?,HashTable,HashMap,Both,None of the above,HashMap
+8,Which interface should be implemented for sorting on basis of many criteria’s?,Comparator,Comparable,Serializable,None,Comparator
+9,What guarantees type-safety in a collection?,Generics,Abstract classes,Interfaces,Collection,Generics
+10,HashSet internally uses?,Set,HashMap,List,Collection,Set

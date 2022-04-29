@@ -1,0 +1,11 @@
+id,question,option1,option2,option3,option4,answer
+1,Inside which HTML element do we put the JavaScript?,<scripting>,<script>,<javascript>,<js>,<script>
+2,Where is the correct place to insert a JavaScript?,<body> section,<head> section,Both,None,Both
+3,JavaScript is a ___ -side programming language.,Client,Server,Both,None,Both
+4,How do you find the minimum of x and y using JavaScript?,min(x;y);,Math.min(x;y),Math.min(xy),min(xy);,Math.min(x;y)
+5,Which of the following is an IF statement in JavaScript?,if i==5,if i==5 then,if(i==5),All of the above,if(i==5)
+6,_____ operator is used to assign a value to a variable?,*,=,+,x,=
+7,_____ statement is used to declare variable in JavaScript,Executable,Declaration,Conditional,Assignment,Declaration
+8,Which of the following is  a server-side JavaScript object?,FileUpload,Date,Function,File,File
+9,_____ operator is used to concatenate two strings,Dot,Arrow,Comma,Plus,Plus
+10,Which of the following statement terminates Java Statement?,Semicolon,Fullstop,Comma,Slash,Semicolon

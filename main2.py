@@ -1,5 +1,4 @@
-#Hello World Page Using KivyMd
-from tabnanny import check
+import webbrowser
 from matplotlib import pyplot as plt
 import numpy as np
 import pandas as pd
@@ -11,6 +10,9 @@ from kivy.storage.jsonstore import JsonStore
 import json
 from kivy.core.window import Window
 from kivy.uix.scrollview import ScrollView
+from kivymd.uix.card import MDCard
+from kivymd.uix.label import MDLabel
+from kivymd.uix.button import MDFlatButton
 from kivymd.uix.screen import Screen
 from kivymd.uix.dialog import MDDialog
 from kivymd.uix.button import MDFlatButton
@@ -18,10 +20,9 @@ from kivy.lang import Builder
 from kivy.uix.boxlayout import BoxLayout
 from kivymd.theming import ThemableBehavior
 from kivymd.uix.list import MDList
-from kivy.uix.screenmanager import ScreenManager, Screen
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from kivy_garden.graph import Graph  
-# from kivy.garden.matplotlib import FigureCanvasKivyAgg
+from kivy.uix.screenmanager import ScreenManager, Screen  
+from backend_kivy import FigureCanvasKivy
+# from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 Window.size = (450, 700)
 class WelcomeScreen(Screen):
@@ -66,6 +67,13 @@ class AnalysisScreen(Screen):
     pass
 class HistoryScreen(Screen):
     pass
+
+class RecommendScreen1(Screen):
+    pass
+class RecommendScreen2(Screen):
+    pass
+class MD3Card(MDCard):
+    pass
 sm = ScreenManager()
 sm.add_widget(WelcomeScreen(name='welcome'))
 sm.add_widget(LoginScreen(name='login'))
@@ -85,9 +93,11 @@ sm.add_widget(QuizScreen10(name='quiz10'))
 sm.add_widget(ResultScreen(name='result'))
 sm.add_widget(AnalysisScreen(name='analysis'))
 sm.add_widget(HistoryScreen(name='history'))
+sm.add_widget(RecommendScreen1(name='recommend1'))
+sm.add_widget(RecommendScreen2(name='recommend2'))
 class MainApp(MDApp):
     def build(self):
-        self.str1 = Builder.load_file('file.kv')
+        self.str1 = Builder.load_file('file2.kv')
         return self.str1
 
     def on_start(self):
@@ -95,13 +105,8 @@ class MainApp(MDApp):
         f = open('user.json','r')
         x = json.load(f)
         # self.theme_cls.theme_style = "Dark"
+        self.str1.get_screen('welcome').manager.current = 'welcome'
         # self.str1.get_screen('profile').manager.current = 'profile'
-        try:
-            if x != {}:
-                self.str1.get_screen('login').manager.current = 'login'
-            
-        except KeyError:
-            self.str1.get_screen('welcome').manager.current = 'welcome'
     
     def analysis(self):
         f = open('user.json','r+')
@@ -132,16 +137,29 @@ class MainApp(MDApp):
                                 sum += df.iloc[j]["Score"]
                         score.append(sum)
                         sum = 0
+                    res = dict(zip(skill, score))
+                    x = max(res.values())
+                    y = min(res.values())
+                    for i in res:
+                        if res[i] == x:
+                            self.str1.get_screen('analysis').ids.strong.text = i
+                        elif res[i] == y:
+                            self.str1.get_screen('analysis').ids.weak.text = i
                     print(score)
                     df1 = pd.DataFrame({"Skill":skill,"Score":score})
                     print(df1)
                     x = np.array(df1["Skill"])
                     y = np.array(df1["Score"])
-                    plt.pie(y, labels = x)
-                    plt.show()
+                    plt.bar(x,y)
+                    # plt.show()
                     # plt.plot(df.Skill, df.Score)
                     # plt.show()
-                    # self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasTkAgg(plt.gcf()))
+                    if self.str1.get_screen('analysis').ids.analysis.text == "":
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
+                        self.str1.get_screen('analysis').ids.analysis.text = "1"
+                    else:
+                        self.str1.get_screen('analysis').ids.analysis.clear_widgets()
+                        self.str1.get_screen('analysis').ids.analysis.add_widget(FigureCanvasKivy(plt.gcf()))
         except:
             pass
     def check_login(self):
@@ -158,29 +176,49 @@ class MainApp(MDApp):
                 self.username_changer()
                 break
             else:
-                # cancel = MDFlatButton(text='Cancel',on_press = self.close_username_dialogue)
-                # self.dialog = MDDialog(title = 'Wrong Username or Password',text = 'Please try again',size_hint = (0.8,0.3),buttons = [cancel])
-                # self.dialog.open()
                 self.str1.get_screen('login').manager.current = 'login'
                 print("User Not Found")
                 pass
+        self.str1.get_screen('login').ids.main_button.disabled = True
 
     def check_username(self):
         f = open('user.json','r')
         x = json.load(f)
         length = len(x)
+        user_check = False
         self.username = self.str1.get_screen('login').ids.username_text_field.text
         self.password_text = self.str1.get_screen('login').ids.password_text_field.text
-        for i in range(0,length):
-            if x[f'Userinfo{i}']['name'] == self.username and x[f'Userinfo{i}']['password'] == self.password_text:
-                self.str1.get_screen('login').ids.main_button.disabled = False
-            else:
-                # cancel_btn_username_dialogue = MDFlatButton(text="Retry", on_release=self.close_username_dialogue)
-                # self.dialog = MDDialog(title="Invalid Username", text="Wrong Username Please Try Again !!", size_hint=(0.8, 0.3), buttons=[cancel_btn_username_dialogue])
-                # self.dialog.open()
-                self.str1.get_screen('login').manager.current = 'login'
-                print("User Not Found")
-                pass
+        if self.username == '' or self.password_text == '':
+            self.dialogpop(True,True)
+        else:
+            for i in range(0,length):
+                if x[f'Userinfo{i}']['name'] == self.username and x[f'Userinfo{i}']['password'] == self.password_text:
+                    self.str1.get_screen('login').ids.main_button.disabled = False
+                    user_check = True
+                else:
+                    self.str1.get_screen('login').manager.current = 'login'
+                    print("User Not Found")
+                    pass
+        self.dialogpop(False,user_check)
+
+    def dialogpop(self,login,user):
+        if login == True and user == False:
+            cancel_btn_username_dialogue = MDFlatButton(text="Retry", on_release=self.close_username_dialogue)
+            self.dialog = MDDialog(title="Invalid Username", text="Wrong Username Please Try Again !!", size_hint=(0.8, 0.3), buttons=[cancel_btn_username_dialogue])
+            self.dialog.open()
+            pass
+        # elif login == False and user == True:
+        #     cancel = MDFlatButton(text='Cancel',on_press = self.close_username_dialogue)
+        #     self.dialog = MDDialog(title = 'Invalid Username',text = 'Wrong Username Please Try Again !!',size_hint = (0.8,0.3),buttons = [cancel])
+        #     self.dialog.open()
+        #     pass
+        elif login == True and user == True:
+            cancel = MDFlatButton(text='Cancel',on_press = self.close_username_dialogue)
+            self.dialog = MDDialog(title = 'Invalid Credential',text = 'Please Put Correct Credential',size_hint = (0.8,0.3),buttons = [cancel])
+            self.dialog.open()
+            pass
+        else:
+            print("Wrong")
     
     def close_username_dialogue(self,obj):
         self.dialog.dismiss()
@@ -193,18 +231,26 @@ class MainApp(MDApp):
         self.username_text = self.str1.get_screen('signup').ids.username_text_field.text
         self.password = self.str1.get_screen('signup').ids.password_text_field.text
         self.email = self.str1.get_screen('signup').ids.email_text_field.text
-        if x == {}:
+        if self.username_text == '' or self.password == '' or self.email == '':
+            self.dialogpop(True,True)
+            self.str1.get_screen('signup').manager.current = 'signup'
+            pass
+        elif x == {}:
             self.store.put('Userinfo0',id=id-1,name=self.username_text, password=self.password, email=self.email)
             with open("./Data/UserData/user0.csv",'w+') as f1:
                     writer1 = csv.writer(f1)
                     writer1.writerow(["UserID","Name","Skill","Score"])
                     f1.close()
+            self.str1.get_screen('signup').manager.current = 'login'
+            self.str1.get_screen('signup').transition.direction = 'left'
         else:
             self.store.put(f'Userinfo{id}',id=id ,name=self.username_text,email= self.email, password= self.password)
             with open("./Data/UserData/user"+str(id)+".csv",'w+') as f1:
                     writer1 = csv.writer(f1)
                     writer1.writerow(["UserID","Name","Skill","Score"])
                     f1.close()
+            self.str1.get_screen('signup').manager.current = 'login'
+            self.str1.get_screen('signup').manager.transition.direction = 'left'
             id += 1
             self.store1.put('id',id=id)
         self.username_changer()
@@ -232,6 +278,7 @@ class MainApp(MDApp):
         self.data_tables = MDDataTable(
             size_hint=(1, 1),
             use_pagination=True,
+            pagination_menu_pos = 'auto',
             column_data=[
                 ("Skill", dp(30)),
                 ("Score", dp(30)),
@@ -240,6 +287,7 @@ class MainApp(MDApp):
             elevation = 4,)
         if self.str1.get_screen('profile').ids.status.text == "":
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text="1"
         else:
             self.str1.get_screen('profile').ids.status.clear_widgets()
             self.str1.get_screen('profile').ids.status.add_widget(self.data_tables)
@@ -267,6 +315,7 @@ class MainApp(MDApp):
         self.data_tables = MDDataTable(
             size_hint=(1, 1),
             use_pagination=True,
+            pagination_menu_pos = 'auto',
             rows_num = 10,
             column_data=[
                 ("Skill", dp(30)),
@@ -277,6 +326,7 @@ class MainApp(MDApp):
         print(main_list)
         if self.str1.get_screen('history').ids.status.text == "":
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
+            self.str1.get_screen('history').ids.status.text = "1"
         else:
             self.str1.get_screen('history').ids.status.clear_widgets()
             self.str1.get_screen('history').ids.status.add_widget(self.data_tables)
@@ -330,18 +380,25 @@ class MainApp(MDApp):
         self.str1.get_screen(x).ids.option1.theme_text_color = 'Primary'  
 
     def quiz(self,skill):
+        self.store1 = JsonStore('id.json')
         if skill == "Python":
             df = pd.read_csv('./Data/Questions/quiz1.csv')
+            self.store1.put('skill',skill=skill)
         elif skill == "Java":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/java.csv')
+            self.store1.put('skill',skill=skill)
         elif skill == "C++":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/c++.csv')
+            self.store1.put('skill',skill=skill)
         elif skill == "Graphic Design":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/graphic.csv')
+            self.store1.put('skill',skill=skill)
         elif skill == "Web Development":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/web.csv')
+            self.store1.put('skill',skill=skill)
         elif skill == "Javascript":
-            df = pd.read_csv('./Data/Questions/quiz1.csv')
+            df = pd.read_csv('./Data/Questions/javascript.csv')
+            self.store1.put('skill',skill=skill)
         else:
             cancel_btn_username_dialogue = MDFlatButton(text="Retry", on_release=self.close_username_dialogue)
             self.dialog = MDDialog(title="No Skill", text="There Are No Skill Selected", size_hint=(0.8, 0.3), buttons=[cancel_btn_username_dialogue])
@@ -360,7 +417,20 @@ class MainApp(MDApp):
         self.store1 = JsonStore('id.json')
         score = self.store1.get('score')["score"]
         x = self.str1.get_screen(sc).ids
-        df = pd.read_csv('./Data/Questions/quiz1.csv')
+        if self.store1["skill"]["skill"] == "Python":
+            df = pd.read_csv('./Data/Questions/quiz1.csv')
+        elif self.store1["skill"]["skill"] == "Java":
+            df = pd.read_csv('./Data/Questions/java.csv')
+        elif self.store1["skill"]["skill"] == "C++":
+            df = pd.read_csv('./Data/Questions/c++.csv')
+        elif self.store1["skill"]["skill"] == "Graphic Design":
+            df = pd.read_csv('./Data/Questions/graphic.csv')
+        elif self.store1["skill"]["skill"] == "Web Development":
+            df = pd.read_csv('./Data/Questions/web.csv')
+        elif self.store1["skill"]["skill"] == "Javascript":
+            df = pd.read_csv('./Data/Questions/javascript.csv')
+        else:
+            pass                                               
         if x.option1.md_bg_color == [0,0,1,1]:
             if x.option1.text ==  df.iloc[int(sc[-1])-1]['answer']:
                 score += 2
@@ -406,11 +476,51 @@ class MainApp(MDApp):
                     f1.close()
                 break
     def result(self):
-        df = pd.read_csv('./Data/Questions/quiz1.csv')
+        self.store1 = JsonStore('id.json')
+        skill = self.store1.get('skill')["skill"]
         x = self.store1.get('score')["score"]
         self.str1.get_screen('result').ids.result.text = ""+str(x)+"/20"
-        self.store_data(df.iloc[0]["skill"],str(x))
+        self.store_data(skill,str(x))
         x*=0
         self.store1.put('score',score=x)
+        self.username_changer()
 
+    def recommend(self,screen):
+        print("Hello")
+        df = pd.read_csv('./Data/recommend.csv')
+        topics = []
+        if screen == "recommend1":
+            x = self.str1.get_screen('analysis').ids.strong.text
+        elif screen == 'recommend2':
+            x = self.str1.get_screen('analysis').ids.weak.text
+        for i in range(0,len(df)):
+            if x == df.iloc[i]['Skill']:
+                topics.append(df.iloc[i]['Topic'])
+        print(topics)
+        self.str1.get_screen(screen).ids.item1_label.text = topics[-5]
+        self.str1.get_screen(screen).ids.item2_label.text = topics[-4]
+        self.str1.get_screen(screen).ids.item3_label.text = topics[-3]
+        self.str1.get_screen(screen).ids.item4_label.text = topics[-2]
+        self.str1.get_screen(screen).ids.item5_label.text = topics[-1]
+
+    def web(self,screen,item):
+        if item == "item1_label":
+            x = self.str1.get_screen(screen).ids.item1_label.text
+        elif item == "item2_label":
+            x = self.str1.get_screen(screen).ids.item2_label.text
+        elif item == "item3_label":
+            x = self.str1.get_screen(screen).ids.item3_label.text
+        elif item == "item4_label":
+            x = self.str1.get_screen(screen).ids.item4_label.text
+        elif item == "item5_label":
+            x = self.str1.get_screen(screen).ids.item5_label.text
+        df = pd.read_csv('./Data/recommend.csv')
+        for i in range(0,len(df)):
+            if x == df.iloc[i]['Topic']:
+                y = df.iloc[i]['Link']
+                print(y)
+                webbrowser.open(y)
+                break
+            else:
+                pass
 MainApp().run()

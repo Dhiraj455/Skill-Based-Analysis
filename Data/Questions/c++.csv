@@ -1,0 +1,11 @@
+id,question,option1,option2,option3,option4,answer
+1,C++ was developed by ___,Thomas Kushz,John Kemney,Bjarne Stroutstrup,James Goling,Bjarne Stroutstrup
+2,Which one of the following is a keyword?,Size,key,Jump,Switch,Switch
+3,What is a constant that contains a single character enclosed within single quotes?,Character,Numeric,Fixed,Floating point,Character
+4,The modulus operator uses ___ character.,+,*,/,%,%
+5,Which of the following is not a C++ keyword?,This,New,Cont,If,Cont
+6,____ is a variable that holds a memory address.,Long double,Float,Char,Pointer,Pointer
+7,Addressing is done using ___ number system.,Decimal,Hexadecimal,Octal,Binary,Hexadecimal
+8,Which one of the following is a membership operator?,!,&,::,.,::
+9,____ Operator requires two operands.,Logical,Binary,Unary,Ternary,Binary
+10,Additive; Multiplicative; shift; Bitwise logical and assignment operators is ____ operator.,Conditional,Relational,Unary,Binary,Binary

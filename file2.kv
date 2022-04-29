@@ -1462,9 +1462,9 @@ ScreenManager:
                     user_font_size: '40sp'
                     pos_hint: {'center_x': .9, 'center_y': .07}
                     on_press:
-                        root.manager.current = 'analysis'
-                        root.manager.transition.direction = 'left'
                         app.analysis()
+                        # root.manager.current = 'analysis'
+                        # root.manager.transition.direction = 'left'
     MDScreen:
         MDNavigationLayout:
             ScreenManager:
