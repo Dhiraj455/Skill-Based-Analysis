@@ -22,6 +22,7 @@ from kivymd.theming import ThemableBehavior
 from kivymd.uix.list import MDList
 from kivy.uix.screenmanager import ScreenManager, Screen  
 from backend_kivy import FigureCanvasKivy
+from kivy.clock import Clock
 # from kivy.garden.matplotlib.backend_kivyagg import FigureCanvasKivyAgg
 
 Window.size = (450, 700)
@@ -164,6 +165,13 @@ class MainApp(MDApp):
                     # self.str1.get_screen('analysis').manager.transition.direction = 'left'
         except:
             pass
+
+    # def refresh(self):
+    #     self.str1.get_screen('analysis').ids.analysis.clear_widgets()
+    #     self.str1.get_screen('analysis').ids.analysis.refresh_done()
+    #     # Clock.schedule_once(refresh,1)
+
+
     def check_login(self):
         f = open('user.json','r')
         x = json.load(f)
@@ -463,6 +471,19 @@ class MainApp(MDApp):
                 pass
         else:
             print(score)
+
+    def restart(self):
+        print("Hey")
+        for i in range(1,11):
+            self.str1.get_screen(f"quiz{i}").ids.option1.md_bg_color = (0,0,1,0)
+            self.str1.get_screen(f"quiz{i}").ids.option1.theme_text_color = 'Primary'  
+            self.str1.get_screen(f"quiz{i}").ids.option2.md_bg_color = (0,0,1,0)
+            self.str1.get_screen(f"quiz{i}").ids.option2.theme_text_color = 'Primary' 
+            self.str1.get_screen(f"quiz{i}").ids.option3.md_bg_color = (0,0,1,0)
+            self.str1.get_screen(f"quiz{i}").ids.option3.theme_text_color = 'Primary' 
+            self.str1.get_screen(f"quiz{i}").ids.option4.md_bg_color = (0,0,1,0)
+            self.str1.get_screen(f"quiz{i}").ids.option4.theme_text_color = 'Primary'
+    
 
     def store_data(self,skill,score):
         f = open('user.json','r')
